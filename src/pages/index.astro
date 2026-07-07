@@ -1,11 +1,16 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+	title="miraclepopcorn"
+	description="道具や仕組み、写真やものづくりを通して、日々のことを記録しています。"
+>
+	<section class="home-intro" aria-labelledby="home-heading">
+		<p class="site-kicker">miraclepopcorn</p>
+		<h1 id="home-heading">日常の編集室</h1>
+		<p>
+			道具や仕組み、写真やものづくりを通して、日々のことを記録しています。
+		</p>
+	</section>
+</BaseLayout>
