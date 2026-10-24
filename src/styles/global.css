@@ -157,11 +157,3 @@ h1 {
 		width: 100%;
 	}
 }
-
-/* Future decorative motion must opt in to no-preference locally.
-   Do not blanket-disable animations that may carry functional meaning. */
-@media (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
-	}
-}
