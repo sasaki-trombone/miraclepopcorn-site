@@ -4,6 +4,7 @@
 	--color-surface: #ffffff;
 	--color-text: #1f1f1f;
 	--color-muted: #66645f;
+	--color-accent: #8b4936;
 	/* Decorative separators only, not meaningful UI boundaries. */
 	--color-border: #e5e0d8;
 	--color-border-control: var(--color-muted);
