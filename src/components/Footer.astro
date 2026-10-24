@@ -1,5 +1,12 @@
+---
+interface Props {
+	home?: boolean;
+}
+const { home = false } = Astro.props;
+---
+
 <footer class="site-footer">
 	<div class="content-wrap">
-		<p>&copy; miraclepopcorn</p>
+		<p>{home ? `miraclepopcorn. © ${new Date().getFullYear()}` : '© miraclepopcorn'}</p>
 	</div>
 </footer>

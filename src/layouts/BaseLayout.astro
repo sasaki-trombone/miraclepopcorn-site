@@ -6,9 +6,10 @@ import '../styles/global.css';
 interface Props {
 	title: string;
 	description: string;
+	home?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, home = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,14 +24,46 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<div class="site-shell">
-			<Header />
+		<div class:list={['site-shell', { 'home-layout': home }]}>
+			<Header home={home} />
 			<main class="site-main">
 				<div class="content-wrap">
 					<slot />
 				</div>
 			</main>
-			<Footer />
+			<Footer home={home} />
 		</div>
 	</body>
 </html>
+
+<style>
+	.home-layout {
+		--content-width: 960px;
+		--space-page: clamp(1.25rem, 6vw, 3.75rem);
+		--color-border: #c9c5bd;
+		--font-size-heading: clamp(1.75rem, 4.5vw, 2.25rem);
+		--line-height-body: 1.6;
+		line-height: var(--line-height-body);
+	}
+	.home-layout :global(.site-main) {
+		padding-block: 2.75rem 0;
+	}
+	.home-layout :global(.site-header),
+	.home-layout :global(.site-footer) {
+		border: 0;
+		background: var(--color-background);
+	}
+	.home-layout :global(.header-inner) {
+		border-bottom: 1px solid var(--color-border);
+	}
+	.home-layout :global(.site-footer) {
+		padding-block: 0 1rem;
+	}
+	.home-layout :global(.site-footer .content-wrap) {
+		border-top: 1px solid var(--color-border);
+		padding-top: 0.75rem;
+	}
+	.home-layout :global(.site-footer p) {
+		font-size: 0.75rem;
+	}
+</style>

@@ -1,16 +1,163 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import LinkArrow from '../components/LinkArrow.astro';
+
+// Layout samples only; these are not published articles or live projects.
+const journal = [
+	{ date: '2026-10-12', displayDate: '10.12', title: '日々使う道具について' },
+	{ date: '2026-10-04', displayDate: '10.04', title: '小さな仕組みをつくる' },
+];
+const projects = ['RSS Timetable', 'Film Log'];
 ---
 
 <BaseLayout
 	title="miraclepopcorn"
-	description="道具や仕組み、写真やものづくりを通して、日々のことを記録しています。"
+	description="道具や写真、ものづくりを通して、日々の暮らしと向き合う過程を記録しています。"
+	home
 >
-	<section class="home-intro" aria-labelledby="home-heading">
-		<p class="site-kicker">miraclepopcorn</p>
-		<h1 id="home-heading">日常の編集室</h1>
-		<p>
-			道具や仕組み、写真やものづくりを通して、日々のことを記録しています。
-		</p>
+	<section class="hero" aria-labelledby="home-heading">
+		<p class="hero-copy" lang="en">An editorial studio for everyday and tech.</p>
+		<h1 id="home-heading">miraclepopcorn.</h1>
+		<p class="hero-description">道具や写真、ものづくりを通して、日々の暮らしと向き合う過程を記録しています。</p>
+	</section>
+
+	<section class="home-section" id="journal" aria-labelledby="journal-heading">
+		<div class="section-header">
+			<SectionHeading id="journal-heading" number="01" title="Journal" sample />
+			<a class="all-posts" href="/blog" lang="en">All posts <LinkArrow /></a>
+		</div>
+		<article class="journal-featured">
+			<img src="/images/journal-sample.svg" alt="街の写真に差し替えるためのサンプル画像" width="1200" height="488" />
+			<time datetime="2026-10-18">2026.10.18</time>
+			<h3>いつもの街を、少し違う角度から</h3>
+			<p>歩きながら見つけた風景と、写真に残しておきたいもの。</p>
+		</article>
+		<div class="journal-list">
+			{journal.map((entry) => (
+				<article class="journal-entry">
+					<h3>{entry.title}</h3>
+					<time datetime={entry.date}>{entry.displayDate}</time>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section class="home-section" id="lab" aria-labelledby="lab-heading">
+		<SectionHeading id="lab-heading" number="02" title="Lab" sample />
+		<ul class="lab-list">
+			{projects.map((name) => <li><h3 lang="en">{name}</h3></li>)}
+		</ul>
+	</section>
+
+	<section class="home-section about" id="about" aria-labelledby="about-heading">
+		<SectionHeading id="about-heading" number="03" title="About" />
+		<p>日常の中で考えたこと、試したこと、作ったものを残すための個人サイトです。</p>
+		<a href="/profile" lang="en">More about me <LinkArrow /></a>
 	</section>
 </BaseLayout>
+
+<style>
+	.hero {
+		padding-bottom: 2.75rem;
+	}
+	.hero-copy {
+		font-size: var(--font-size-small);
+		text-transform: uppercase;
+	}
+	.hero h1 {
+		margin-block: 0.75rem 1.25rem;
+		font-size: var(--font-size-heading);
+		font-weight: 700;
+		letter-spacing: -0.035em;
+	}
+	.hero-description {
+		max-width: 25rem;
+	}
+	.home-section {
+		border-top: 1px solid var(--color-border);
+		padding-top: 1rem;
+		margin-bottom: 1.5rem;
+		scroll-margin-top: 1rem;
+	}
+	.section-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.all-posts {
+		flex-shrink: 0;
+		color: var(--color-muted);
+		font-size: var(--font-size-small);
+		text-decoration: none;
+	}
+	.all-posts:hover {
+		text-decoration: underline;
+	}
+	.journal-featured img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-bottom: 0.5rem;
+	}
+	time {
+		flex-shrink: 0;
+		color: var(--color-muted);
+		font-size: var(--font-size-small);
+	}
+	h3 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 600;
+		line-height: 1.6;
+		overflow-wrap: anywhere;
+	}
+	.journal-featured {
+		padding-bottom: 1.5rem;
+	}
+	.journal-featured h3 {
+		margin-block: 0.25rem;
+		font-size: 1.25rem;
+	}
+	.journal-entry {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		border-top: 1px solid var(--color-border);
+		padding-block: 0.75rem;
+	}
+	.journal-list {
+		border-bottom: 1px solid var(--color-border);
+	}
+	.lab-list {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 2rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.lab-list li {
+		border-bottom: 1px solid var(--color-border);
+		padding-block: 0.25rem 0.75rem;
+	}
+	.lab-list h3 {
+		font-weight: 500;
+	}
+	.about a {
+		display: inline-block;
+		padding-block: 0.25rem;
+		color: var(--color-muted);
+		font-size: var(--font-size-small);
+	}
+	@media (max-width: 560px) {
+		.section-header {
+			gap: 0.5rem;
+		}
+		.lab-list {
+			gap: 1rem;
+		}
+	}
+</style>
